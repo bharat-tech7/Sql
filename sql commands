@@ -1,0 +1,74 @@
+use sakila;
+show tables;
+select * from actor ;
+select concat("Mr",First_name,' ',last_name) from actor;
+select concat_ws("Mr",First_name,' ',last_name) from actor;
+select first_name, substr(first_name,2) from actor;	
+select first_name, substr(first_name,2,3) from actor;	
+select first_name, substr(first_name,-4,2) from actor;
+select first_name, substr(first_name,2,3) from actor;
+select first_name, length(first_name) from actor;
+-- dummy ( Dual )
+select 10+2 from dual;
+select trim("  hel  lo  ")  from dual;
+select trim(trailing ' 'from "     hello  ")  from dual;
+select ltrim("  hel  lo  ")  from dual;
+-- lpad,rpad
+select first_name,lpad(first_name,6,"#") from actor;
+select first_name,rpad(first_name,6,"#") from actor;
+-- concat,substr,lpad ,trim
+-- Numeric Function 
+-- round,trucate,floor,mod,pow,ceil
+select round(12.4) from dual;
+select round(12.462,2) from dual;
+select round(312.465,-3) from dual;
+select round(512.465,-3) from dual;
+select truncate(123.465,2) from dual;
+select floor(10.9999) ,ceil(10.00999)from dual;
+select last_day(now()) from dual;
+--  multi-row functions
+use sakila;
+select * from payment;
+select distinct(customer_id),amount from payment;
+select sum(amount), count(amount) , count(*) , avg(amount) from payment;
+select sum(amount) from payment where customer_id=2;
+select customer_id , sum(amount),count(*)  from payment group by customer_id;
+-- Find out the number of customer severed by each staff
+select staff_id, count(customer_id) from payment group by staff_id;
+-- find out the total number of payments,total amount spend and total number if customer severed in each month
+select   month(payment_date) ,sum(amount),count(*) from payment group by month(payment_date) having count(*)>2000;
+-- where clause only use when the data is physcially present in table.we use having clause at the place of where
+select * from address;
+select count(address_id),count(address2) from address;
+-- get the each district name ,the total district present  and the sum of city id for each district 
+select district,count(district),sum(city_id)from address group by district;
+use sakila;
+select customer_id,sum(amount) as "totalAmount" from payment 
+group by customer_id order by totalAmount desc;
+-- subquary 
+use sakila;
+select * from payment;
+select amount from payment where payment_id =3;
+select * from payment where amount=5.99;
+select amount from payment where payment_id =5;
+select * from payment where amount=9.99;
+select * from payment
+where amount=(select amount from payment where payment_id =5);
+-- get the payment id ,staff id and rental id amount only for that payment where the retail id is greater than the retail id of payment idhere payment_id= 4);
+select rental_id from payment where payment_id=4;
+select * from payment where rental_id>1422;
+-- get the  payment id ,amount the 10% increment of amount for the payment where the month of payment date is equal to the month of payment id 5
+select month(Payment_date) from payment where payment_id =5;
+select payment_id ,amount, amount*1.1 from payment 
+where month(payment_date)=( select month(Payment_date)
+ from payment
+ where payment_id =5);
+ -- get only the custmer id and the total number of payment done by each customer 
+ -- only for whose total number of patment is greater than the total number of payment done by customer id =2
+ -- customer id
+ -- total number of payment 
+
+select customer_id ,sum(amount),
+-- multirow subquary in, any , all opertor
+-- co-related sub quary 
+
