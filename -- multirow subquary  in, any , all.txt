@@ -1,0 +1,40 @@
+-- multirow subquary  in, any , all operator;
+use employees; 
+select * from employees;
+use sakila;
+select count(*) from payment where
+amount <all(select amount from payment where payment_id in (1,3));
+-- co-related sub quary 
+-- data type in sql 
+-- 2 
+-- int( numberical)
+-- numberical (width, unsigned)
+
+create database regex1;
+use regex1;
+create table xyz(id int unsigned);
+insert into xyz values (2147483648);
+select * from xyz;
+create table employee1 ( eid int unsigned);
+insert into employee1 values(247483648);
+select * from employee1;
+
+-- tinyint ,smallint,medimint,bigint 
+-- 1 byte, 2 byte,3byte,byte
+create table abc (salary double(5,2));
+insert into abc values(20.1);
+insert into abc values(120.15552);
+insert into abc values(3420.1);
+select * from abc;
+create table ep_var(name1 varchar(3));
+insert into ep_var values ("Xy      ");
+select name1,length(name1) from ep_var;
+create table ep_var1(eid int check(eid>2) );
+insert into ep_var values(1);
+create table e1(dob date);
+insert into e1 values ('2024-12-07');
+select * from e1;
+-- conditional statement 
+use sakila;
+select first_name ,if(first_name='NICK',0,if(first_name="ED",2,"not value"))
+from actor;
