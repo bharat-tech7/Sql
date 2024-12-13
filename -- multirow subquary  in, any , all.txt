@@ -38,3 +38,61 @@ select * from e1;
 use sakila;
 select first_name ,if(first_name='NICK',0,if(first_name="ED",2,"not value"))
 from actor;
+use regex1;
+create table xyz(id int unsigned);
+insert into xyz values (2147483648);
+select * from xyz;
+create table employee1 ( eid int unsigned);
+insert into employee1 values(247483648);
+select * from employee1;
+
+-- tinyint ,smallint,medimint,bigint 
+-- 1 byte, 2 byte,3byte,byte
+create table abc (salary double(5,2));
+insert into abc values(20.1);
+insert into abc values(120.15552);
+insert into abc values(3420.1);
+select * from abc;
+create table ep_var(name1 varchar(3));
+insert into ep_var values ("Xy      ");
+select name1,length(name1) from ep_var;
+create table ep_var1(eid int check(eid>2) );
+insert into ep_var values(1);
+create table e1(dob date);
+insert into e1 values ('2024-12-07');
+select * from e1;
+-- conditional statement 
+use sakila;
+select first_name ,if(first_name='NICK',0,if(first_name="ED",2,"not value"))
+from actor;
+
+create database regex;
+use regex;
+create table product(pid int, pname varchar(20),price int);
+insert	into product values (10,"tv",100),(20,"mobile",200),(30,"gyser",4000),
+(40,"yash",5000);
+select * from product;
+create table orders (oid int, city varchar(20),product_id int);
+insert into orders values 
+(1991,"jaipur",10),(1992,"gao",20),(1993,"UK",10),(1994,"shimla",40)
+,(1995,"kerala",80);
+select * from product;
+select o.oid,o.city,o.product_id,p.pid,p.pname,p.price 
+from orders as o  right join product as p
+on o.product_id = p.pid;
+select* from orders;
+use sakila;
+select * from actor ;
+select * from film_actor;
+-- get the actor id , full name of a the actor, the film id ,and  last update colum through the table;
+SELECT 
+    a.actor_id, 
+CONCAT(first_name, ' ', las    t_name) AS full_name, 
+
+    f.film_id, 
+    f.last_update
+FROM 
+    actors as a
+inner JOIN 
+    films as f on a.actor_id = f.actor_id;
+
